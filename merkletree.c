@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "SHA256.h"
+#include "SHA256.h"  // Assuming SHA256 functions are defined in "SHA256.h" header
 
-#define SHA256_HASH_SIZE 32
+#define SHA256_HASH_SIZE 32  // Size of the SHA-256 hash in bytes
 
 struct hashnode {
-    char hash[65];
+    char hash[65];  // String to store a hexadecimal hash (plus null terminator)
 };
 
 typedef struct hashnode hash;
 
+// Function to compute Merkle tree hashes from leaf nodes
 void computeHashArray(hash* hasharray, int numLeafNodes) {
     if (numLeafNodes <= 0) {
         return;
