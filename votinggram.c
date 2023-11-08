@@ -46,7 +46,7 @@ void markVoterAsVoted(const char *uniqueID) {
         printf("Error: Could not open the voted file.\n");
         exit(1);
     }
-    fprintf(votedFile, "%s\n", uniqueID);
+    fprintf(votedFile, "\n%s\n", uniqueID);
     fclose(votedFile);
 }
 
@@ -73,11 +73,12 @@ int main() {
 
             if (hasVoterAlreadyVoted(uniqueID)) {
                 printf("This voter has already cast their vote.\n");
-            } else {
+            } 
+            else {
                 markVoterAsVoted(uniqueID); // Mark the voter as voted
                 FILE * voted;
-                voted=fopen("voted.txt","w+");
-                fprintf(voted,"%s",uniqueID);
+                voted=fopen("voted.txt","a");
+                fprintf(voted,"\n%s",uniqueID);
                 // Voting logic: allow the voter to cast their vote
                 int choice;
                 printf("Menu:\n");
@@ -103,18 +104,25 @@ int main() {
                     char filename[10];
                     if (choice == 4) {
                         strcpy(filename, "NOTA.txt");
-                    } else {
-                        snprintf(filename, sizeof(filename), "party%d.txt", choice);
-                    }
+                    } 
+                     if (choice == 1) {
+                        strcpy(filename, "party1.txt");
+                    } 
+                     if (choice == 2) {
+                        strcpy(filename, "party2.txt");
+                    } 
+                     if (choice == 3) {
+                        strcpy(filename, "party3.txt");
+                    } 
 
-                    FILE *file = fopen(filename, "w+");
+                    FILE *file = fopen(filename, "a");
                     if (file == NULL) {
                         printf("Error opening the file %s.\n", filename);
                         return 1;
                     }
 
                     // Write the string to the file
-                    if (fprintf(file, "%s", hexDigest) < 0) {
+                    if (fprintf(file, "\n%s", hexDigest) < 0) {
                         printf("Error writing to the file %s.\n", filename);
                         fclose(file);
                         return 1;
