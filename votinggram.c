@@ -46,7 +46,7 @@ void markVoterAsVoted(const char *uniqueID) {
         printf("Error: Could not open the voted file.\n");
         exit(1);
     }
-    fprintf(votedFile, "\n%s\n", uniqueID);
+    fprintf(votedFile, "\n%s", uniqueID);
     fclose(votedFile);
 }
 
@@ -78,7 +78,7 @@ int main() {
                 markVoterAsVoted(uniqueID); // Mark the voter as voted
                 FILE * voted;
                 voted=fopen("voted.txt","a");
-                fprintf(voted,"\n%s",uniqueID);
+                
                 // Voting logic: allow the voter to cast their vote
                 int choice;
                 printf("Menu:\n");
