@@ -37,22 +37,13 @@ void computeHashArray(hash* hasharray, int numLeafNodes) {
             }
             hexDigest[2 * SHA256_HASH_SIZE] = '\0';
 
-            // Update the hasharray with the new hash
             strcpy(hasharray[parentIndex].hash, hexDigest);
-            parentIndex++;
-        }
-
-        // If there's an odd number of nodes, duplicate the last one
-        if (numLeafNodes % 2 != 0) {
-            // Assuming hasharray[parentIndex] is already initialized
-            strcpy(hasharray[parentIndex].hash, hasharray[numLeafNodes - 1].hash);
             parentIndex++;
         }
 
         numLeafNodes = parentIndex;
     }
 }
-
 
 int main() {
     FILE* hashFile;
